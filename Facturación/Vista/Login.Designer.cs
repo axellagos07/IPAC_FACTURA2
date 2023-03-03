@@ -117,6 +117,7 @@
             this.MostarContraseñabutton.Size = new System.Drawing.Size(23, 21);
             this.MostarContraseñabutton.TabIndex = 7;
             this.MostarContraseñabutton.UseVisualStyleBackColor = true;
+            this.MostarContraseñabutton.Click += new System.EventHandler(this.MostarContraseñabutton_Click);
             // 
             // pictureBox1
             // 
@@ -135,7 +136,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.Cancelarbutton;
-            this.ClientSize = new System.Drawing.Size(552, 181);
+            this.ClientSize = new System.Drawing.Size(535, 175);
             this.ControlBox = false;
             this.Controls.Add(this.MostarContraseñabutton);
             this.Controls.Add(this.pictureBox1);
@@ -147,7 +148,7 @@
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";

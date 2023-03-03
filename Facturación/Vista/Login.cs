@@ -34,6 +34,27 @@ namespace Vista
                 return;
             }
             errorProvider1.Clear();
+            //Validar en la base de datos
+
+
+            //Mostramos el menú
+
+            Menu menuFormulario = new Menu();
+            this.Hide();
+            menuFormulario.Show();
+        }
+
+        private void MostarContraseñabutton_Click(object sender, EventArgs e)
+        {
+            if (ContraseñatextBox.PasswordChar == '*')
+            {
+                ContraseñatextBox.PasswordChar = '\0';
+            }
+            else
+            {
+                ContraseñatextBox.PasswordChar = '*';
+            }
+
         }
     }
 }
