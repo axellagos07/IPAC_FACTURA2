@@ -1,4 +1,6 @@
-﻿using Entidades;
+﻿using Datos;
+using Entidades;
+using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -12,6 +14,9 @@ namespace Vista
         }
 
         string tipoOperacion;
+        DataTable dt = new DataTable();
+        UsuarioDB UsuarioDB = new UsuarioDB();
+        Usuario user = new Usuario();
         private void HabilitarControles()
         {
             CodigotextBox.Enabled = true;
@@ -97,8 +102,6 @@ namespace Vista
                 }
                 errorProvider1.Clear();
 
-                Usuario user = new Usuario();
-
                 user.CodigoUsuario = CodigotextBox.Text;
                 user.Nombre = NombretextBox.Text;
                 user.Contraseña = ContraseñatextBox.Text;
@@ -115,6 +118,20 @@ namespace Vista
 
                 }
                 //Insertar en la base ded datos
+
+                bool inserto = UsuarioDB.Insertar(user);
+
+                if (inserto)
+                {
+                    LimpiarControles();
+                    DesabilitarControles();
+                    TraerUsuarios();
+                    MessageBox.Show("Registro guardado");
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo efectuar el registro");
+                }
 
             }
             else if (tipoOperacion == "Modificar")
@@ -139,6 +156,19 @@ namespace Vista
 
             }
 
+        }
+
+        private void UsuariosForm_Load(object sender, System.EventArgs e)
+        {
+            TraerUsuarios();
+
+        }
+
+        private void TraerUsuarios()
+        {
+            dt = UsuarioDB.DevolverUsuarios();
+
+            UsuariosdataGridView.DataSource = dt;
         }
     }
 }

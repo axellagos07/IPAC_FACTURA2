@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Datos;
+using Entidades;
+using System;
 using System.Windows.Forms;
 
 namespace Vista
 {
-    public partial class Login : Form
+    public partial class LoginForm : Form
     {
-        public Login()
+        public LoginForm()
         {
             InitializeComponent();
         }
@@ -34,14 +36,35 @@ namespace Vista
                 return;
             }
             errorProvider1.Clear();
+
+
             //Validar en la base de datos
+            Login login = new Login(UsuariotextBox.Text, ContraseñatextBox.Text);
+            Usuario usuario = new Usuario();
+            UsuarioDB usuarioDB = new UsuarioDB();
 
+            usuario = usuarioDB.Autenticar(login);
 
-            //Mostramos el menú
+            if (usuario != null)
+            {
+                if (usuario.EstaActivo)
+                {
+                    //Mostramos el menú
+                    Menu menuFormulario = new Menu();
+                    this.Hide();
+                    menuFormulario.Show();
+                }
+                else
+                {
+                    MessageBox.Show("El usuario no esta activo", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
 
-            Menu menuFormulario = new Menu();
-            this.Hide();
-            menuFormulario.Show();
+            }
+            else
+            {
+                MessageBox.Show("Datos de usuario Incorrecto", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void MostarContraseñabutton_Click(object sender, EventArgs e)
