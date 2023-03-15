@@ -1,7 +1,9 @@
 ﻿using Datos;
 using Entidades;
+using System;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Vista
@@ -28,6 +30,7 @@ namespace Vista
             Adjuntarbutton.Enabled = true;
             Guardarbutton.Enabled = true;
             Cancelarbutton.Enabled = true;
+            Modificarbutton.Enabled = false;
 
         }
         private void DesabilitarControles()
@@ -41,6 +44,7 @@ namespace Vista
             Adjuntarbutton.Enabled = false;
             Guardarbutton.Enabled = false;
             Cancelarbutton.Enabled = false;
+            Modificarbutton.Enabled = true;
 
         }
 
@@ -136,13 +140,62 @@ namespace Vista
             }
             else if (tipoOperacion == "Modificar")
             {
+                user.CodigoUsuario = CodigotextBox.Text;
+                user.Nombre = NombretextBox.Text;
+                user.Contraseña = ContraseñatextBox.Text;
+                user.Rol = RolcomboBox.Text;
+                user.Correo = CorreotextBox.Text;
+                user.EstaActivo = EstaActivocheckBox.Checked;
 
+                if (FotopictureBox.Image != null)
+                {
+                    System.IO.MemoryStream ms = new System.IO.MemoryStream();
+                    FotopictureBox.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    user.Foto = ms.GetBuffer();
+
+                }
+
+                bool modifico = UsuarioDB.Editar(user);
+                if (modifico)
+                {
+                    LimpiarControles();
+                    DesabilitarControles();
+                    TraerUsuarios();
+                    MessageBox.Show("Registro actualizado correctamente");
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo actualizar el registro");
+                }
             }
         }
 
         private void Modificarbutton_Click(object sender, System.EventArgs e)
         {
             tipoOperacion = "Modificar";
+            if (UsuariosdataGridView.SelectedRows.Count > 0)
+            {
+                CodigotextBox.Text = UsuariosdataGridView.CurrentRow.Cells["CodigoUsuario"].Value.ToString();
+                NombretextBox.Text = UsuariosdataGridView.CurrentRow.Cells["Nombre"].Value.ToString();
+                ContraseñatextBox.Text = UsuariosdataGridView.CurrentRow.Cells["Contrasena"].Value.ToString();
+                CorreotextBox.Text = UsuariosdataGridView.CurrentRow.Cells["Correo"].Value.ToString();
+                RolcomboBox.Text = UsuariosdataGridView.CurrentRow.Cells["Rol"].Value.ToString();
+                EstaActivocheckBox.Checked = Convert.ToBoolean(UsuariosdataGridView.CurrentRow.Cells["EstaActivo"].Value);
+
+                byte[] miFoto = UsuarioDB.DevolverFoto(UsuariosdataGridView.CurrentRow.Cells["CodigoUsuario"].Value.ToString());
+
+                if (miFoto.Length > 0)
+                {
+                    MemoryStream ms = new MemoryStream(miFoto);
+                    FotopictureBox.Image = System.Drawing.Image.FromStream(ms);
+                }
+
+                HabilitarControles();
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un registro");
+            }
         }
 
         private void Adjuntarbutton_Click(object sender, System.EventArgs e)
@@ -169,6 +222,32 @@ namespace Vista
             dt = UsuarioDB.DevolverUsuarios();
 
             UsuariosdataGridView.DataSource = dt;
+        }
+
+        private void Eliminarbutton_Click(object sender, EventArgs e)
+        {
+            if (UsuariosdataGridView.SelectedRows.Count > 0)
+            {
+                DialogResult resultado = MessageBox.Show("Esta seguro de eliminar el registro", "Advertencia", MessageBoxButtons.YesNo);
+
+                if (resultado == DialogResult.Yes)
+                {
+                    bool elimino = UsuarioDB.Eliminar(UsuariosdataGridView.CurrentRow.Cells["CodigoUsuario"].Value.ToString());
+
+                    if (elimino)
+                    {
+                        LimpiarControles();
+                        DesabilitarControles();
+                        TraerUsuarios();
+                        MessageBox.Show("Registro eliminado");
+                    }
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("No se pudo eliminar el registro ");
+            }
         }
     }
 }

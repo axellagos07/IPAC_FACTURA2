@@ -46,6 +46,8 @@
             this.Nuevobutton = new System.Windows.Forms.Button();
             this.ProductosdataGridView = new System.Windows.Forms.DataGridView();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label5 = new System.Windows.Forms.Label();
+            this.EstaActivocheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.ImagenpictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProductosdataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -139,11 +141,12 @@
             this.AdjuntarImagenbutton.Size = new System.Drawing.Size(47, 32);
             this.AdjuntarImagenbutton.TabIndex = 9;
             this.AdjuntarImagenbutton.UseVisualStyleBackColor = true;
+            this.AdjuntarImagenbutton.Click += new System.EventHandler(this.AdjuntarImagenbutton_Click);
             // 
             // Cancelarbutton
             // 
             this.Cancelarbutton.Enabled = false;
-            this.Cancelarbutton.Location = new System.Drawing.Point(504, 200);
+            this.Cancelarbutton.Location = new System.Drawing.Point(497, 206);
             this.Cancelarbutton.Name = "Cancelarbutton";
             this.Cancelarbutton.Size = new System.Drawing.Size(75, 23);
             this.Cancelarbutton.TabIndex = 23;
@@ -153,18 +156,18 @@
             // 
             // Eliminarbutton
             // 
-            this.Eliminarbutton.Enabled = false;
-            this.Eliminarbutton.Location = new System.Drawing.Point(404, 200);
+            this.Eliminarbutton.Location = new System.Drawing.Point(397, 206);
             this.Eliminarbutton.Name = "Eliminarbutton";
             this.Eliminarbutton.Size = new System.Drawing.Size(75, 23);
             this.Eliminarbutton.TabIndex = 22;
             this.Eliminarbutton.Text = "Eliminar";
             this.Eliminarbutton.UseVisualStyleBackColor = true;
+            this.Eliminarbutton.Click += new System.EventHandler(this.Eliminarbutton_Click);
             // 
             // Guardarbutton
             // 
             this.Guardarbutton.Enabled = false;
-            this.Guardarbutton.Location = new System.Drawing.Point(303, 200);
+            this.Guardarbutton.Location = new System.Drawing.Point(296, 206);
             this.Guardarbutton.Name = "Guardarbutton";
             this.Guardarbutton.Size = new System.Drawing.Size(75, 23);
             this.Guardarbutton.TabIndex = 21;
@@ -174,8 +177,7 @@
             // 
             // Modificarbutton
             // 
-            this.Modificarbutton.Enabled = false;
-            this.Modificarbutton.Location = new System.Drawing.Point(207, 200);
+            this.Modificarbutton.Location = new System.Drawing.Point(200, 206);
             this.Modificarbutton.Name = "Modificarbutton";
             this.Modificarbutton.Size = new System.Drawing.Size(75, 23);
             this.Modificarbutton.TabIndex = 20;
@@ -185,7 +187,7 @@
             // 
             // Nuevobutton
             // 
-            this.Nuevobutton.Location = new System.Drawing.Point(116, 200);
+            this.Nuevobutton.Location = new System.Drawing.Point(109, 206);
             this.Nuevobutton.Name = "Nuevobutton";
             this.Nuevobutton.Size = new System.Drawing.Size(75, 23);
             this.Nuevobutton.TabIndex = 19;
@@ -205,11 +207,31 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(91, 169);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(74, 16);
+            this.label5.TabIndex = 25;
+            this.label5.Text = "EstaActivo:";
+            // 
+            // EstaActivocheckBox
+            // 
+            this.EstaActivocheckBox.AutoSize = true;
+            this.EstaActivocheckBox.Location = new System.Drawing.Point(217, 171);
+            this.EstaActivocheckBox.Name = "EstaActivocheckBox";
+            this.EstaActivocheckBox.Size = new System.Drawing.Size(15, 14);
+            this.EstaActivocheckBox.TabIndex = 26;
+            this.EstaActivocheckBox.UseVisualStyleBackColor = true;
+            // 
             // ProductosForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(730, 383);
+            this.Controls.Add(this.EstaActivocheckBox);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.ProductosdataGridView);
             this.Controls.Add(this.Cancelarbutton);
             this.Controls.Add(this.Eliminarbutton);
@@ -227,9 +249,10 @@
             this.Controls.Add(this.CodigotextBox);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ProductosForm";
             this.Text = "Productos";
+            this.Load += new System.EventHandler(this.ProductosForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ImagenpictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProductosdataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
@@ -257,5 +280,7 @@
         private System.Windows.Forms.Button Nuevobutton;
         private System.Windows.Forms.DataGridView ProductosdataGridView;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.CheckBox EstaActivocheckBox;
     }
 }

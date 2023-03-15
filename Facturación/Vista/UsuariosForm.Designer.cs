@@ -158,7 +158,6 @@
             // EstaActivocheckBox
             // 
             this.EstaActivocheckBox.AutoSize = true;
-            this.EstaActivocheckBox.Enabled = false;
             this.EstaActivocheckBox.Location = new System.Drawing.Point(203, 239);
             this.EstaActivocheckBox.Name = "EstaActivocheckBox";
             this.EstaActivocheckBox.Size = new System.Drawing.Size(15, 14);
@@ -198,7 +197,6 @@
             // 
             // Modificarbutton
             // 
-            this.Modificarbutton.Enabled = false;
             this.Modificarbutton.Location = new System.Drawing.Point(289, 270);
             this.Modificarbutton.Name = "Modificarbutton";
             this.Modificarbutton.Size = new System.Drawing.Size(75, 23);
@@ -220,13 +218,13 @@
             // 
             // Eliminarbutton
             // 
-            this.Eliminarbutton.Enabled = false;
             this.Eliminarbutton.Location = new System.Drawing.Point(486, 270);
             this.Eliminarbutton.Name = "Eliminarbutton";
             this.Eliminarbutton.Size = new System.Drawing.Size(75, 23);
             this.Eliminarbutton.TabIndex = 17;
             this.Eliminarbutton.Text = "Eliminar";
             this.Eliminarbutton.UseVisualStyleBackColor = true;
+            this.Eliminarbutton.Click += new System.EventHandler(this.Eliminarbutton_Click);
             // 
             // Cancelarbutton
             // 
