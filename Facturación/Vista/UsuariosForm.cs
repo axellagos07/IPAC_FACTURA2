@@ -127,8 +127,8 @@ namespace Vista
 
                 if (inserto)
                 {
-                    LimpiarControles();
                     DesabilitarControles();
+                    LimpiarControles();
                     TraerUsuarios();
                     MessageBox.Show("Registro guardado");
                 }
